@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="factory">
+    <include><uri>model://ground_plane</uri></include>
+    <include><uri>model://sun</uri></include>
+
+    <!-- Red-jacket intruder -->
+    <actor name="intruder">
+      <pose>12 -3 0 0 0 0</pose>
+      <skin><filename>walk.dae</filename></skin>
+      <animation name="walking"><filename>walk.dae</filename></animation>
+      <script>
+        <loop>true</loop>
+        <delay_start>0</delay_start>
+        <trajectory id="0" type="walking">
+          <waypoint><pose>12 -3 0 0 0 0</pose><time>0</time></waypoint>
+          <waypoint><pose>15 -3 0 0 0 0</pose><time>10</time></waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
+    <!-- Static camera -->
+    <model name="camera">
+      <pose>0 0 2 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.1 0.1 0.1</size></box></geometry>
+        </visual>
+        <sensor name="cam" type="camera">
+          <camera>
+            <horizontal_fov>1.57</horizontal_fov>
+            <image><width>1280</width><height>720</height></image>
+            <clip><far>100</far></clip>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <topic>/camera/image_raw</topic>
+        </sensor>
+      </link>
+    </model>
+  </world>
+</sdf>
